@@ -1,0 +1,26 @@
+---
+title: "makefile Tutorial"
+author: "Manuel Reif"
+date: "07. Jänner 2016"
+output: html_document
+---
+
+Um seine eigenen Daten Analysen nachvollziehbar zu machen, Stichwort: 'reproduceable research', ist es hilfreich bestimmte tools zu verwenden. Mit 'reproduceable research' sind in diesem Dokument all jene Bestrebungen nach Nachvollziehbarkeit der Datenanalyse gemeint die über das klassische dokumentieren der Variablen und deren Ausprägungen hinausgehen.
+
+- `knitr` wird verwendet um den Code mit dem Text direkt zu assoziieren - das heisst dass auf einen Blick ins .Rmd/.Rwd klar wird wie die Ergebnisse (Grafiken, Tabellen etc.) entstanden sind. 
+- `git` wird verwendet um den Entstehungsprozess der Syntax/Text etc. files nachvollziehbar zu machen
+- `makefiles` werden dazu verwendet um die einzelnen Syntaxfiles (bspw. .R/.tex files) und einzelnen Outputfiles miteinander zu verbinden, also die logische Abfolge des Syntaxdurchlaufs zu bestimmen, um zum gewünschten Ergebnis zu kommen. Im sogenannten `Makefile` sind jene Regeln und Abhängigkeiten definiert.
+
+
+Dieses Tutorial ist vorwiegend dafür gedacht um Makefiles im Rahmen von R und \LaTeX zu verwenden.
+
+
+
+### Wann sind Makfiles sinnvoll
+
+
+Makefiles zu erstellen ist immer sinnvoll, aber insbesondere dann, wenn die Anzahl der zu verbindenden Syntaxfiles steigt, mehrere Outputs realisiert werden sollen (bspw. Grafiken/Bericht/Tabellen etc.) oder die Aufgaben auch von Dritten, die nicht ständig im Projekt sind, leicht zu bewältigen sein sollten. Der Vorteil ist, dass auch bei kleinen Projekten der administrative Aufwand von Makefiles nicht sehr hoch sind, vor allem dann wenn diese von Anfang an angelegt und erweitert werden.
+
+
+
+
