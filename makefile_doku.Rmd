@@ -23,4 +23,34 @@ Makefiles zu erstellen ist immer sinnvoll, aber insbesondere dann, wenn die Anza
 
 
 
+## Aufbau von Makefiles
+
+
+
+Makefiles sind 
+
+
+### 'automatic variables' zB: $@ etc... plus anwendungsbsp.
+
+
+### was ist .PHONY plus Anwendungsbsp
+
+
+### Argumente in R files in Kommandozeile setzen
+
+
+### handling multiple targets 
+
+
+### klassische (minimale) uebersichtliche Templates zu LaTeX (pur), Rmd/Rwd, R, R und Rmd gemischt etc
+
+
+
+
+
+
+
+
+
+
 
