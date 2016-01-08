@@ -25,9 +25,19 @@ Makefiles zu erstellen ist immer sinnvoll, aber insbesondere dann, wenn die Anza
 
 ## Aufbau von Makefiles
 
+Ein Makefile ist folgendermaßen aufgebaut:
+
+```
+TARGET: Prerequisite1 Prerequisite2   
+  Commands
+```   
+
+- Target: dieses file wird am Ende erzeugt - Targets enden immer mit einem Doppelpunkt
+- Prerequisites: das sind files von denen die Entstehung von Target abhängt. Sind durch ein Leerzeichen getrennt!
+- Commands: das ist die Syntax wie das Target erstellt wird. **MÜSSEN IMMER* mit einem **Tabulator** eingerückt sein. Leerzeichen funktionieren **NICHT**!
 
 
-Makefiles sind 
+Wird ein file der **prerequisites** aktualisiert (bspw. ergänzt) und ist damit aktueller als das **target** wird bei einer Eingabe von `make` das Targetfile neu erzeugt mittels der unten stehenden **Commands**.
 
 
 ### 'automatic variables' zB: $@ etc... plus anwendungsbsp.
@@ -39,10 +49,13 @@ Makefiles sind
 ### Argumente in R files in Kommandozeile setzen
 
 
-### handling multiple targets 
+### handling multiple targets
 
 
 ### klassische (minimale) uebersichtliche Templates zu LaTeX (pur), Rmd/Rwd, R, R und Rmd gemischt etc
+
+
+### wie funktioniert code externalisation in knitr (finde ich recht praktisch) - weiss nicht ob das zu makefiles passt.
 
 
 
