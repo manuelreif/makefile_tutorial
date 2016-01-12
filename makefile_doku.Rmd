@@ -5,9 +5,9 @@ date: "07. Jänner 2016"
 output: html_document
 ---
 
-Um seine eigenen Daten Analysen nachvollziehbar zu machen, Stichwort: 'reproduceable research', ist es hilfreich bestimmte tools zu verwenden. Mit 'reproduceable research' sind in diesem Dokument all jene Bestrebungen nach Nachvollziehbarkeit der Datenanalyse gemeint die über das klassische dokumentieren der Variablen und deren Ausprägungen hinausgehen.
+Um seine eigenen Daten Analysen nachvollziehbar zu machen, Stichwort: 'reproducible research', ist es hilfreich bestimmte Tools zu verwenden. Mit 'reproducible research' sind in diesem Dokument all jene Bestrebungen nach Nachvollziehbarkeit der Datenanalyse gemeint die über das klassische dokumentieren der Variablen und deren Ausprägungen hinausgehen.
 
-- `knitr` wird verwendet um den Code mit dem Text direkt zu assoziieren - das heisst dass auf einen Blick ins .Rmd/.Rwd klar wird wie die Ergebnisse (Grafiken, Tabellen etc.) entstanden sind. 
+- `knitr` wird verwendet um den Code mit dem Text direkt zu assoziieren - das heisst dass auf einen Blick ins .Rmd/.Rnw klar wird wie die Ergebnisse (Grafiken, Tabellen etc.) entstanden sind. 
 - `git` wird verwendet um den Entstehungsprozess der Syntax/Text etc. files nachvollziehbar zu machen
 - `makefiles` werden dazu verwendet um die einzelnen Syntaxfiles (bspw. .R/.tex files) und einzelnen Outputfiles miteinander zu verbinden, also die logische Abfolge des Syntaxdurchlaufs zu bestimmen, um zum gewünschten Ergebnis zu kommen. Im sogenannten `Makefile` sind jene Regeln und Abhängigkeiten definiert.
 
@@ -52,7 +52,7 @@ Wird ein file der **prerequisites** aktualisiert (bspw. ergänzt) und ist damit 
 ### handling multiple targets
 
 
-### klassische (minimale) uebersichtliche Templates zu LaTeX (pur), Rmd/Rwd, R, R und Rmd gemischt etc
+### klassische (minimale) uebersichtliche Templates zu LaTeX (pur), Rmd/Rnw, R, R und Rmd gemischt etc
 
 
 ### wie funktioniert code externalisation in knitr (finde ich recht praktisch) - weiss nicht ob das zu makefiles passt.
