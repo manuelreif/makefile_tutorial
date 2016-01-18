@@ -40,6 +40,86 @@ TARGET: Prerequisite1 Prerequisite2
 Wird ein file der **prerequisites** aktualisiert (bspw. ergänzt) und ist damit aktueller als das **target** wird bei einer Eingabe von `make` das Targetfile neu erzeugt mittels der unten stehenden **Commands**.
 
 
+## Erstes Beispiel
+
+Betrachten wir die Dateien im Ordner `./make1`.
+
+1. In der R Syntax (`syntaxfile1.R`) wird ein plot erzeugt und rausgespeichert
+2. Das Makefile stellt den Zusammenhang her.
+    a. Target ist das resultierende **pdf** file
+    b. Abhängig ist dieses von der Syntax, die dieses file erzeugt (in diesem fall ist dies nur das eine file)
+    c. Eine Zeile darunter wird einfach das .R file ausgeführt.
+    
+
+Wie geht man nun schrittweise vor:
+
+1. Verzeichnis wechseln nach: ./make1
+2. `make` in die Console eintippen
+3. Es sollten die Commands ausgeführt werden & Ergebnisfile wird ausgegeben
+4. Führt man jetzt **nocheinmal** `make` aus wird nichts mehr passieren (`make: 'mygraphic1.pdf' is up to date.`).
+
+
+Wir lernen:
+
+1. steht nur ein Eintrag im Makefile, wird dieser mit `make` ausgeführt
+2. `make` achtet darauf was ausgeführt werden muss, indem die Erstellungsdaten der files verglichen werden. Wäre unser Syntaxfile nun aktueller als das target, dann führt `make` nochmal die ganze Befehlskette aus
+
+
+
+## Zweites Beispiel
+
+
+Angenommen wir hätten 2 Schritte zu absolvieren:
+
+1. Wir erzeugen/extrahieren die Daten und bereiten diese gegebenenfalls auf und speichern diese
+2. Wir lesen diese Daten ein, verarbeiten/analysieren diese und erzeugen grafische Darstellungen
+3. Wir wollen auch gleich wieder aufräumen können (unnötige files weg)
+
+
+Dann brauchen wir mehr als diese Zeilen.
+
+Wir wechseln ins Verzeichnis make2 und sehen uns den Inhalt an.
+
+1. `datenaufbereitung.R` bearbeitet die Daten und schreibt ein `.RData` file raus.
+2. `analyse.R` schreibt den plot raus
+
+
+Diese Abhängigkeiten sind im Makefile dokumentiert. Wir sehen uns das Makefile genau an.
+
+1. Wir haben Schlüsselwörter: **all:** bezeichnet was passiert wenn nur `make` eingetippt wird oder auch `make all`. So kann man mehrere Prozesse definieren, oder bspw. auch nur Teilprozesse ablaufen lassen.
+2. Wir sehen 2 Abhängigkeitsdefinitionen
+3. Wir definieren 2 clean funktionen die Dateien mit bestimmten Endungen löschen sollen.
+
+
+### Keywords
+
+Die Allgemeine Logik hinter diesen Keywords sieht so aus:
+
+```
+keyword: TARGET
+
+TARGET: Prerequisite1 Prerequisite2   
+  Commands
+```  
+
+
+1. Wird `make keyword` aufgerufen, weiss das Programm dass dieses von TARGET abhängt.
+2. Also wird TARGET gesucht und geprüft von welchen Dateien dieses abhängt.
+3. Ist TARGET aktuell passiert nichts.
+4. Ist TARGET nicht aktuell (also älter als eines der Prerequisites) werden die Commands ausgeführt.
+
+
+### Aufgabe
+
+1. Führe `make` aus, und schau welche Prozesse der Reihe nach ablaufen. Vergleiche dies mit dem Makefile
+2. Führe `make` ein weiteres Mal aus, und schau was passiert
+3. Führe `make clean` aus und dann nochmal `make` und schau was passiert.
+4. Führe `make clean_pdf` aus und dann nochmal `make` und schau was passiert.
+
+
+
+
+
 ### 'automatic variables' zB: $@ etc... plus anwendungsbsp.
 
 
