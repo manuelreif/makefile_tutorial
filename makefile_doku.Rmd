@@ -118,6 +118,24 @@ TARGET: Prerequisite1 Prerequisite2
 
 
 
+## Drittes Beispiel
+
+
+Erstelle selbst ein Makefile zu den 3 files im Ordner make3.
+
+1. `createdata.R`
+2. `makeanalysis.R`
+3. `creategraphics.R`
+
+
+Hinweise:
+
+1. Checke die Abhängigkeiten
+2. `creategraphics.R` erzeugt mehrere Grafiken - nimm hier als Target: `creategraphics.Rout`
+3. definiere ein `make clean`
+
+
+
 
 
 ### 'automatic variables' zB: $@ etc... plus anwendungsbsp.
