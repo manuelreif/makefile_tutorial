@@ -136,9 +136,33 @@ Hinweise:
 
 
 
+## Variablen
+
+
+Definiere Variablen um weniger tippen zu müssen. Ein Beispiel findet sich in Ordner **make_variables**.
+Für ein näheres Studium der Einsatzmöglichkeiten siehe: http://www.gnu.org/software/make/manual/make.html#Variables-Simplify
+
+
+
+## Multiple Targets
+
+
+Was passiert wenn ein Skript multiple Targets erstellt - also ein R Script bspw. mehrere .pdf files erzeugt.
+
+1. Mehrere Targets werden definiert (auf der linken Seite)
+2. Bei n Targets wird das Skript n Mal ausgeführt
+3. Typischerweise will man das nicht, weil alle Targets durch einen Durchlauf erzeugt werden, daher muss man tricksen.
+4. siehe hier: https://www.gnu.org/software/make/manual/html_node/Multiple-Targets.html
+
+
+
+
 
 
 ### 'automatic variables' zB: $@ etc... plus anwendungsbsp.
+
+
+
 
 
 ### was ist .PHONY plus Anwendungsbsp
@@ -148,6 +172,12 @@ Hinweise:
 
 
 ### handling multiple targets
+
+
+https://www.gnu.org/software/make/manual/html_node/Chained-Rules.html#Chained-Rules
+http://stackoverflow.com/questions/2973445/gnu-makefile-rule-generating-a-few-targets-from-a-single-source-file
+
+
 
 
 ### klassische (minimale) uebersichtliche Templates zu LaTeX (pur), Rmd/Rnw, R, R und Rmd gemischt etc
