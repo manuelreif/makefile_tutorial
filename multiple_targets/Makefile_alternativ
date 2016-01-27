@@ -1,9 +1,7 @@
 # make3 Makefile
-path= ./graphics/
-pdfs= $(path)lm1.pdf $(path)lm1_spline.pdf $(path)lm2.pdf
-# --------------------------------------------------------------
+## das hat den nachteil, dass das skript NICHT durchlaeuft wenn ein pdf geloescht wird. das ist das problem.
 
-all: $(pdfs)
+all: ./graphics/*.pdf
 
 mtcars_red.RData: createdata.R
 	R CMD BATCH --no-save createdata.R
@@ -12,14 +10,15 @@ results.RData: makeanalysis.R mtcars_red.RData
 	R CMD BATCH --no-save makeanalysis.R
 
 
-## ---- MULTIPLE TARGETS -----------
-$(pdfs): creategraphics_inter
+## so funktionierts
+./graphics/*.pdf: creategraphics_inter
 
 .SECONDARY: creategraphics_inter
 
 creategraphics_inter: creategraphics.R results.RData
 	R CMD BATCH --no-save creategraphics.R
-## ---------------------------------
+
+
 
 # das ist die unelegante Moeglichkeit die Abhaengigkeiten zu bestimmen
 # weil das .Rout auch ertzeugt wird wenn ein Error passiert
@@ -31,7 +30,4 @@ creategraphics_inter: creategraphics.R results.RData
 
 # wenn ein minus davor steht wird der error irgnored
 clean:
-	-rm *.Rout *.bak
-	
-clean_all:
 	-rm *.Rout *.RData *.bak
