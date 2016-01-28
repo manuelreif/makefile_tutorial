@@ -9,24 +9,24 @@ output:
 ---
 
 
-Um seine eigenen Daten Analysen nachvollziehbar zu machen, Stichwort: 'reproducible research', ist es hilfreich bestimmte Tools zu verwenden. Mit 'reproducible research' sind in diesem Dokument all jene Bestrebungen nach Nachvollziehbarkeit der Datenanalyse gemeint die über das klassische dokumentieren der Variablen und deren Ausprägungen hinausgehen.
+Um seine eigenen Datenanalysen nachvollziehbar zu machen, Stichwort: 'reproducible research' (https://cran.r-project.org/web/views/ReproducibleResearch.html), ist es hilfreich bestimmte Tools zu verwenden. Mit 'reproducible research' sind in diesem Dokument all jene Bestrebungen nach Nachvollziehbarkeit der Datenanalyse gemeint die über das klassische Dokumentieren der Variablen und deren Ausprägungen hinausgehen.
 
-- `knitr` wird verwendet um den Code mit dem Text direkt zu assoziieren - das heisst dass auf einen Blick ins .Rmd/.Rnw klar wird wie die Ergebnisse (Grafiken, Tabellen etc.) entstanden sind. 
-- `git` wird verwendet um den Entstehungsprozess der Syntax/Text etc. files nachvollziehbar zu machen
-- `makefiles` werden dazu verwendet um die einzelnen Syntaxfiles (bspw. .R/.tex files) und einzelnen Outputfiles miteinander zu verbinden, also die logische Abfolge des Syntaxdurchlaufs zu bestimmen, um zum gewünschten Ergebnis zu kommen. Im sogenannten `Makefile` sind jene Regeln und Abhängigkeiten definiert.
-
-
-Dieses Tutorial ist vorwiegend dafür gedacht um Makefiles im Rahmen von R und \LaTeX zu verwenden.
+- `knitr` wird verwendet um den Code mit dem Text direkt zu assoziieren - das heisst dass auf einen Blick ins .Rmd/.Rnw klar wird wie die Ergebnisse (Grafiken, Tabellen etc.) entstanden sind. Der R Code wird direkt in den Text eingebettet.
+- `git` wird verwendet um den Entstehungsprozess der Syntax/Text etc. files nachvollziehbar zu machen. git ist ein bekanntes Versionierungstool und sollte eigentlich immer verwendet werden wenn mit Textfiles gearbeitet wird (https://git-scm.com/).
+- `makefiles` werden dazu verwendet um die einzelnen Syntaxfiles (bspw. .R oder .tex files) und einzelnen Outputfiles miteinander zu verbinden, also die logische Abfolge des Syntaxdurchlaufs zu bestimmen, um zum gewünschten Ergebnis zu kommen. Im sogenannten `Makefile` sind jene Regeln und Abhängigkeiten definiert.
 
 
-Wird dieses Dokument ergänzt und soll aus diesem dann wieder ein .html file erzeugt werden, einfach im Ordner `make` verwenden!
+Dieses Tutorial ist dafür gedacht um Makefiles im Rahmen von R und LaTeX zu verwenden.
+
+
+Soll aus diesem .Rmd ein **.html** file erzeugt werden, einfach `make` anwenden! Dazu wird `R` und das package `rmarkdown` benötigt.
 
 
 
 ### Wann sind Makfiles sinnvoll
 
 
-Makefiles zu erstellen ist immer sinnvoll, aber insbesondere dann, wenn die Anzahl der zu verbindenden Syntaxfiles steigt, mehrere Outputs realisiert werden sollen (bspw. Grafiken/Bericht/Tabellen etc.) oder die Aufgaben auch von Dritten, die nicht ständig im Projekt sind, leicht zu bewältigen sein sollten. Der Vorteil ist, dass auch bei kleinen Projekten der administrative Aufwand von Makefiles nicht sehr hoch sind, vor allem dann wenn diese von Anfang an angelegt und erweitert werden.
+Makefiles zu erstellen ist immer sinnvoll, aber insbesondere dann, wenn die Anzahl der zu verbindenden Syntaxfiles steigt, mehrere Outputs realisiert werden sollen (bspw. Grafiken/Bericht/Tabellen etc.) oder die Aufgaben auch von Dritten, die nicht ständig im Projekt sind, leicht zu bewältigen sein sollten. Der Vorteil ist, dass auch bei kleinen Projekten der administrative Aufwand von Makefiles nicht sehr hoch ist, vor allem dann wenn diese von Anfang an angelegt und erweitert werden.
 
 
 
@@ -39,12 +39,12 @@ TARGET: Prerequisite1 Prerequisite2
   Commands
 ```   
 
-- Target: dieses file wird am Ende erzeugt - Targets enden immer mit einem Doppelpunkt
-- Prerequisites: das sind files von denen die Entstehung von Target abhängt. Sind durch ein Leerzeichen getrennt!
-- Commands: das ist die Syntax wie das Target erstellt wird. **MÜSSEN IMMER* mit einem **Tabulator** eingerückt sein. Leerzeichen funktionieren **NICHT**!
+- **Target**: dieses file wird am Ende erzeugt - Targets enden immer mit einem Doppelpunkt. Es gibt auch spezielle Targets wie bspw. 'all' (siehe später).
+- **Prerequisites**: das sind files von denen die Entstehung des Targets abhängt. Sind mehrere Prerequisites verantwortlich für ein target, werden diese durch Leerzeichen getrennt.
+- **Commands**: das ist die Syntax die das Target erstellt. Diese **MÜSSEN IMMER** mit einem **Tabulator** eingerückt sein. Leerzeichen funktionieren **NICHT**! Mehrere Commands stehen in unterschiedlichen Zeilen.
 
 
-Wird ein file der **prerequisites** aktualisiert (bspw. ergänzt) und ist damit aktueller als das **target** wird bei einer Eingabe von `make` das Targetfile neu erzeugt mittels der unten stehenden **Commands**.
+*Der Clou*: Wird ein file der **prerequisites** aktualisiert (bspw. ergänzt) und ist damit aktueller als das **target** wird bei einer Eingabe von `make` das Targetfile neu erzeugt mittels der unten stehenden **Commands**.
 
 
 ## Erstes Beispiel
@@ -63,7 +63,7 @@ Wie geht man nun schrittweise vor:
 1. Verzeichnis wechseln nach: ./make1
 2. `make` in die Console eintippen
 3. Es sollten die Commands ausgeführt werden & Ergebnisfile wird ausgegeben
-4. Führt man jetzt **nocheinmal** `make` aus wird nichts mehr passieren (`make: 'mygraphic1.pdf' is up to date.`).
+4. Führt man jetzt **nocheinmal** `make` aus wird nichts mehr passieren (Ergebnis: `make: 'mygraphic1.pdf' is up to date.`).
 
 
 Wir lernen:
@@ -76,11 +76,11 @@ Wir lernen:
 ## Zweites Beispiel
 
 
-Angenommen wir hätten 2 Schritte zu absolvieren:
+Angenommen wir hätten 2-3 Schritte zu absolvieren:
 
 1. Wir erzeugen/extrahieren die Daten und bereiten diese gegebenenfalls auf und speichern diese
 2. Wir lesen diese Daten ein, verarbeiten/analysieren diese und erzeugen grafische Darstellungen
-3. Wir wollen auch gleich wieder aufräumen können (unnötige files weg)
+3. Wir wollen auch gleich wieder aufräumen können (unnötige files löschen)
 
 
 Dann brauchen wir mehr als diese Zeilen.
@@ -118,8 +118,8 @@ TARGET: Prerequisite1 Prerequisite2
 
 ### Aufgabe
 
-1. Führe `make` aus, und schau welche Prozesse der Reihe nach ablaufen. Vergleiche dies mit dem Makefile
-2. Führe `make` ein weiteres Mal aus, und schau was passiert
+1. Führe `make` aus, und schau welche Prozesse der Reihe nach ablaufen. Vergleiche dies mit dem Makefile.
+2. Führe `make` ein weiteres Mal aus, und schau was passiert.
 3. Führe `make clean` aus und dann nochmal `make` und schau was passiert.
 4. Führe `make clean_pdf` aus und dann nochmal `make` und schau was passiert.
 
@@ -137,8 +137,8 @@ Erstelle selbst ein Makefile zu den 3 files im Ordner make3.
 
 Hinweise:
 
-1. Checke die Abhängigkeiten
-2. `creategraphics.R` erzeugt mehrere Grafiken - nimm hier als Target: `creategraphics.Rout`
+1. Checke die Abhängigkeiten (.R files öffnen und nachsehen was wo passiert)
+2. `creategraphics.R` erzeugt mehrere Grafiken - nimm hier als Target: `creategraphics.Rout` (wie man dies eleganter lösen kann, wird im Abschnitt [Multiple Targets](#Multiple Targets) ausführlich besprochen).
 3. definiere ein `make clean`
 
 
@@ -146,9 +146,21 @@ Hinweise:
 ## Variablen
 
 
-Definiere Variablen um weniger tippen zu müssen. Ein Beispiel findet sich in Ordner **make_variables**.
+Definiere Variablen um weniger tippen zu müssen bspw. Pfade oder typische Einstellungen für Programme. Ein Beispiel findet sich in Ordner **make_variables**. Vor allem ist dies auch praktische wenn für Dritte Einstellungen möglich sein sollen, ohne dass zu tief in das Makefile eingegriffen werden soll.
+
+
 Für ein näheres Studium der Einsatzmöglichkeiten siehe: http://www.gnu.org/software/make/manual/make.html#Variables-Simplify
 
+Typische Form:
+
+```
+VARIABLE= pfad/in/ordner
+
+# aufgerufen wird das ganze so, natürlich an der richtigen Stelle:
+
+$(VARIABLE)
+
+```   
 
 
 ## Multiple Targets
@@ -170,7 +182,7 @@ Es gibt für diesen Fall 2 workarounds - einen eher speziellen (quick and dirty)
 Bitte jetzt das Makefile aus dem Ordner **multiple_targets** öffnen und betrachten.
 
 
-1) Es werden hier mehrere pdfs durch das R Skript: `creategraphics.R` erzeugt. Welche das sind, wird ganz oben in der variable **pdfs** definiert.
+1) Es werden hier mehrere pdfs durch das R Skript: `creategraphics.R` erzeugt. Welche das sind, wird ganz oben in der Variable **pdfs** definiert.
 2) Es wird eine Abhängigkeit definiert: die pdfs hängen von einem prerequisite **creategraphics_inter** ab.
 3) **creategraphics_inter** wird als **.SECONDARY** definiert (https://www.gnu.org/software/make/manual/html_node/Special-Targets.html)
 4)  **.SECONDARY** ist wichtig. Kommentiert man diese Zeile aus, wird das Skript bei jedem `make` ausgeführt unabhängig welches file aktueller ist. 
@@ -182,9 +194,12 @@ Bitte jetzt das Makefile aus dem Ordner **multiple_targets** öffnen und betrach
 
 ## .PHONY Targets
 
-Alle Targets die als .PHONY gelistet werden, werden jedesmal ausgeführt, auch wenn alles up-to-date ist. Oft wird das bei `make clean` verwendet. `clean` hat ja normalerweise keine Prerequisites, und wäre deshalb sowieso `.PHONY`, aber falls es ein file geben sollte das **clean** heisst, wird clean nicht ordnungsgemäß ausgeführt, weil angenommen wird dass es immer up-to-date ist, weil es ja keine Prerequisites gibt. Daher `clean` immer als `.PHONY` deklarieren, dann funktioniert das immer.
+Alle Targets die als .PHONY gelistet werden, werden **jedesmal** ausgeführt, auch wenn alles up-to-date ist. Oft wird das bei `make clean` verwendet. `clean` hat ja normalerweise keine Prerequisites, und wäre deshalb sowieso `.PHONY`, aber falls es ein file geben sollte das **clean** heisst, wird clean nicht ordnungsgemäß ausgeführt, weil angenommen wird dass es immer up-to-date ist, weil es ja keine Prerequisites gibt. Daher `clean` immer als `.PHONY` deklarieren, dann funktioniert das immer.
 
 Als Beispiel das `Makefile` für dieses Projekt ansehen!
+
+
+Siehe auch: https://www.gnu.org/software/make/manual/html_node/Phony-Targets.html
 
 
 
