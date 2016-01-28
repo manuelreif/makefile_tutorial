@@ -93,7 +93,7 @@ Wir wechseln ins Verzeichnis make2 und sehen uns den Inhalt an.
 
 Diese Abhängigkeiten sind im Makefile dokumentiert. Wir sehen uns das Makefile genau an.
 
-1. Wir haben Schlüsselwörter: **all:** bezeichnet was passiert wenn nur `make` eingetippt wird oder auch `make all`. So kann man mehrere Prozesse definieren, oder bspw. auch nur Teilprozesse ablaufen lassen.
+1. Wir haben standard-targets (ich würde eher 'keywords' dazu sagen): **all:** bezeichnet was passiert wenn nur `make` eingetippt wird oder auch `make all`. So kann man mehrere Prozesse definieren, oder bspw. auch nur Teilprozesse ablaufen lassen (siehe: http://www.gnu.org/software/make/manual/html_node/Standard-Targets.html).
 2. Wir sehen 2 Abhängigkeitsdefinitionen
 3. Wir definieren 2 clean funktionen die Dateien mit bestimmten Endungen löschen sollen.
 
@@ -180,6 +180,14 @@ Bitte jetzt das Makefile aus dem Ordner **multiple_targets** öffnen und betrach
 
 
 
+## .PHONY Targets
+
+Alle Targets die als .PHONY gelistet werden, werden jedesmal ausgeführt, auch wenn alles up-to-date ist. Oft wird das bei `make clean` verwendet. `clean` hat ja normalerweise keine Prerequisites, und wäre deshalb sowieso `.PHONY`, aber falls es ein file geben sollte das **clean** heisst, wird clean nicht ordnungsgemäß ausgeführt, weil angenommen wird dass es immer up-to-date ist, weil es ja keine Prerequisites gibt. Daher `clean` immer als `.PHONY` deklarieren, dann funktioniert das immer.
+
+Als Beispiel das `Makefile` für dieses Projekt ansehen!
+
+
+
 
 
 
@@ -190,7 +198,6 @@ Bitte jetzt das Makefile aus dem Ordner **multiple_targets** öffnen und betrach
 
 
 
-## was ist .PHONY plus Anwendungsbsp
 
 
 ## Argumente in R files in Kommandozeile setzen
