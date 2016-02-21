@@ -3,7 +3,7 @@ This is a Makefile tutorial written in german. I started with writing things dow
 
 http://kbroman.org/minimal_make/
 
-which is an awesome tutorial/summary, with many good and complex real life Makefile examples (Thank you Karl Broman). But I was missing a few things, and so I started to summarize them myself. Finally, I thought that perhaps someone else could use this and tried to convert my notes into a tutorial for Makefile starters (definition: you know nothing about Makefiles John Snow). And because I am far more fluently (and far far more funny) in German than I am in english, I decided to write this in english.
+which is an awesome tutorial/summary, with many good and complex real life Makefile examples (Thank you Karl Broman). But I was missing a few things, and so I started to summarize them myself. Finally, I thought that perhaps someone else could use this and tried to convert my notes into a tutorial for Makefile starters (definition: you know nothing about Makefiles John Snow). And because I am far more fluently (and far far more funny) in German than I am in English, I decided to write this in English.
 
 
 
