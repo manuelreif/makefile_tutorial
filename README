@@ -1,0 +1,16 @@
+
+This is a Makefile tutorial written in german. I started with writing things down I learned about Makefiles for my future self - because I always forgot this and that, and I was tired of searching the web. This website was my starting point:
+
+http://kbroman.org/minimal_make/
+
+which is an awesome tutorial/summary, with many good and complex real life Makefile examples (Thank you Karl Broman). But I was missing a few things, and so I started to summarize them myself. Finally, I thought that perhaps someone else could use this and tried to convert my notes into a tutorial for Makefile starters (definition: you know nothing about Makefiles John Snow). And because I am far more fluently (and far far more funny) in German than I am in english, I decided to write this in english.
+
+
+
+
+You need:
+
+- R installed (incl. `rmarkdown` package)
+- pandoc installed
+- To see the html tutorial file, switch into the repo folder (command line), and type: make. The result is the html tutorial file! Tataaam!
+

@@ -1,5 +1,5 @@
 ---
-title: "makefile Tutorial"
+title: "Makefile Tutorial"
 author: "Manuel Reif"
 date: "07. Jänner 2016"
 output: 
@@ -166,17 +166,17 @@ $(VARIABLE)
 ## Multiple Targets
 
 
-Was passiert wenn ein Skript multiple Targets erstellt - also ein R Script bspw. mehrere .pdf files erzeugt.
+Was passiert wenn ein Skript multiple Targets erstellt - also ein R Script bspw. mehrere .pdf files (Grafiken etc.) erzeugt.
 
-1. Mehrere Targets werden definiert (auf der linken Seite)
+1. Mehrere Targets werden definiert (linke Seite)
 2. Bei n Targets wird das Skript **n Mal ausgeführt** (typischerweise will man das **nicht**, weil alle Targets durch einen Durchlauf erzeugt werden, daher muss man tricksen.
 3. Das Problem wird hier beschrieben: https://www.gnu.org/software/make/manual/html_node/Multiple-Targets.html 
 
 Es gibt für diesen Fall 2 workarounds - einen eher speziellen (quick and dirty) und einen allgemeineren.
 
 
-1) man verwendet **pattern rules**
-2) man verwendet **.INTERMEDIATE** oder **.SECONDARY** für einen workaround
+1) man verwendet **pattern rules** (http://stackoverflow.com/a/3077254/3451929)
+2) man verwendet **.INTERMEDIATE** oder **.SECONDARY** für einen workaround (http://stackoverflow.com/a/4642560/3451929)
 
 
 Bitte jetzt das Makefile aus dem Ordner **multiple_targets** öffnen und betrachten.
@@ -185,7 +185,7 @@ Bitte jetzt das Makefile aus dem Ordner **multiple_targets** öffnen und betrach
 1) Es werden hier mehrere pdfs durch das R Skript: `creategraphics.R` erzeugt. Welche das sind, wird ganz oben in der Variable **pdfs** definiert.
 2) Es wird eine Abhängigkeit definiert: die pdfs hängen von einem prerequisite **creategraphics_inter** ab.
 3) **creategraphics_inter** wird als **.SECONDARY** definiert (https://www.gnu.org/software/make/manual/html_node/Special-Targets.html)
-4)  **.SECONDARY** ist wichtig. Kommentiert man diese Zeile aus, wird das Skript bei jedem `make` ausgeführt unabhängig welches file aktueller ist. 
+4)  **.SECONDARY** ist wichtig. Kommentiert man diese Zeile aus, wird das Skript bei jedem `make` ausgeführt unabhängig welches file aktueller ist. Genau das will man NICHT!
 
 
 `make` interessiert nicht ob ein intermediate file (in unserem Fall **creategraphics_inter**) existiert oder aktualisiert wurde. `make` agiert erst dann, wenn irgendwelche prerequisites neuer ist als das target. So läuft das Skript nur 1 Mal durch (wenn es notwendig ist). Wird ein output gelöscht oder verändert sich etwas in `creategraphics.R` läuft es wieder durch. (https://www.gnu.org/software/make/manual/html_node/Chained-Rules.html#Chained-Rules)
@@ -200,8 +200,6 @@ Als Beispiel das `Makefile` für dieses Projekt ansehen!
 
 
 Siehe auch: https://www.gnu.org/software/make/manual/html_node/Phony-Targets.html
-
-
 
 
 
