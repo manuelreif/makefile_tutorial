@@ -1,7 +1,7 @@
 ---
 title: "Makefile Tutorial"
 author: "Manuel Reif"
-date: "07. Jänner 2016"
+date: '`r Sys.Date()`'
 output: 
   html_document:
     theme: readable
@@ -21,6 +21,8 @@ Dieses Tutorial ist dafür gedacht um Makefiles im Rahmen von R und LaTeX zu ver
 
 Soll aus diesem .Rmd ein **.html** file erzeugt werden, einfach `make` anwenden! Dazu wird `R` und das package `rmarkdown` benötigt.
 
+Eine deutschsprachige Einführung in Makefiles gibt es hier:
+http://www.jfranken.de/homepages/johannes/vortraege/make_inhalt.de.html
 
 
 ### Wann sind Makfiles sinnvoll
@@ -161,6 +163,16 @@ VARIABLE= pfad/in/ordner
 $(VARIABLE)
 
 ```   
+
+Wenn im Makefile eine Variable `FILE=myfile` definiert wurde,
+besteht auch die Möglichkeit, diese beim Aufruf von make zu
+überschreiben: `make FILE=myfile1` erstellt dann z.B. den Output
+unter Verwendung von `myfile(.Rmd)`. Das ist dann praktisch, wenn
+es sich z.B. um die Erstellung von `html`, `pdf` etc. handelt und
+ein Quellfile fix *hineincodiert* ist, aber auch ein anderes
+Inputfile verwendet werden können soll, ohne das Makefile
+umzuschreiben.
+
 
 
 ## Multiple Targets
